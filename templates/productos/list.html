@@ -1,0 +1,27 @@
+{% extends 'base/base.html' %}
+{% block title %}Productos | MimoCommerce{% endblock %}
+{% block contentido %}
+<div class="page-heading">
+    <h1>Productos</h1>
+    <a class="button" href="{% url 'productos:producto_create' %}">Crear producto</a>
+</div>
+<div class="table-wrap">
+    <table>
+        <thead><tr><th>Nombre</th><th>Vencimiento</th><th>Disponible</th><th>Acciones</th></tr></thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.fecha_de_vencimiento|date:"d/m/Y" }}</td>
+                <td>{{ producto.disponibilidad|yesno:"Sí,No" }}</td>
+                <td><div class="actions">
+                    <a class="button button-secondary" href="{% url 'productos:producto_detail' producto.pk %}">Ver detalle</a>
+                    <a class="button button-secondary" href="{% url 'productos:producto_update' producto.pk %}">Editar</a>
+                    <a class="button button-danger" href="{% url 'productos:producto_delete' producto.pk %}">Eliminar</a>
+                </div></td>
+            </tr>
+            {% empty %}<tr><td class="empty" colspan="4">Todavía no hay productos registrados.</td></tr>{% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock contentido %}

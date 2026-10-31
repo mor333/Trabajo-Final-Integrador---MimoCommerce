@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+{% block title %}Detalle de stock | Stock{% endblock %}
+{% block contentido %}
+<div class="page-heading">
+    <h1>Detalle de stock</h1>
+    <a class="button button-secondary" href="{% url 'stock:stock_list' %}">Volver a stock</a>
+</div>
+<dl class="detail-grid">
+    <div class="detail-item"><dt>Producto</dt><dd>{{ stock.producto.nombre }}</dd></div>
+    <div class="detail-item"><dt>Cantidad disponible</dt><dd>{{ stock.cantidad }}</dd></div>
+</dl>
+<div class="form-actions detail-actions">
+    <a class="button" href="{% url 'stock:stock_update' stock.pk %}">Editar stock</a>
+    <a class="button button-secondary" href="{% url 'stock:stock_list' %}">Volver</a>
+</div>
+{% endblock contentido %}

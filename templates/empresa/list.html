@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %}
+{% block title %}Empresas | MimoCommerce{% endblock %}
+{% block contentido %}
+<div class="page-heading">
+    <h1>Empresas</h1>
+    {% if puede_crear_empresa %}
+    <a class="button" href="{% url 'empresa:empresa_create' %}">Crear empresa</a>
+    {% endif %}
+</div>
+<div class="table-wrap">
+    <table>
+        <thead><tr><th>Nombre</th><th>Dirección</th><th>Teléfono</th><th>Email</th><th>Acciones</th></tr></thead>
+        <tbody>
+            {% for empresa in empresas %}
+            <tr>
+                <td>{{ empresa.nombre }}</td>
+                <td>{{ empresa.direccion }}</td>
+                <td>{{ empresa.telefono }}</td>
+                <td>{{ empresa.email }}</td>
+                <td><div class="actions">
+                    <a class="button button-secondary" href="{% url 'empresa:empresa_detail' empresa.pk %}">Ver detalle</a>
+                    <a class="button button-secondary" href="{% url 'empresa:empresa_update' empresa.pk %}">Editar</a>
+                </div></td>
+            </tr>
+            {% empty %}<tr><td class="empty" colspan="5">Todavía no hay empresas registradas.</td></tr>{% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock contentido %}

@@ -1,0 +1,18 @@
+{% extends 'base/base.html' %}
+{% block title %}{{ servicio.nombre }} | Servicios{% endblock %}
+{% block contentido %}
+<div class="page-heading">
+    <h1>Detalle de servicio</h1>
+    <a class="button button-secondary" href="{% url 'servicios:servicio_list' %}">Volver a servicios</a>
+</div>
+<dl class="detail-grid">
+    <div class="detail-item"><dt>Nombre</dt><dd>{{ servicio.nombre }}</dd></div>
+    <div class="detail-item"><dt>Precio</dt><dd>{{ servicio.precio }}</dd></div>
+    <div class="detail-item"><dt>Fecha</dt><dd>{{ servicio.fecha|date:"d/m/Y" }}</dd></div>
+    <div class="detail-item"><dt>Descripción</dt><dd>{{ servicio.descripcion|linebreaksbr }}</dd></div>
+</dl>
+<div class="form-actions detail-actions">
+    <a class="button" href="{% url 'servicios:servicio_update' servicio.pk %}">Editar servicio</a>
+    <a class="button button-secondary" href="{% url 'servicios:servicio_list' %}">Volver</a>
+</div>
+{% endblock contentido %}

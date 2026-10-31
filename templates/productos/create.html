@@ -1,0 +1,14 @@
+{% extends 'base/base.html' %}
+{% block title %}Crear producto | MimoCommerce{% endblock %}
+{% block contentido %}
+    <h1>Crear Producto</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-actions">
+            <button type="submit">Guardar producto</button>
+            <a class="button button-secondary" href="{% url 'productos:producto_list' %}">Cancelar</a>
+        </div>
+    </form>
+{% endblock contentido %}

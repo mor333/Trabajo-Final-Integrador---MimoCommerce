@@ -1,0 +1,96 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}Catálogo | MimoCommerce{% endblock %}
+{% block contentido %}
+<style>
+	.shop-intro { padding: 32px; border: 1px solid #e8d8b5; border-radius: 8px; background: linear-gradient(115deg, #fbf7ee, #f8f2f8 72%); }
+	.shop-kicker { margin: 0 0 10px; color: #795e37; font-size: .8rem; font-weight: 650; text-transform: uppercase; }
+	.shop-intro h1 { margin-bottom: 12px; font-size: 2.1rem; }
+	.shop-intro > p:not(.shop-kicker) { max-width: 620px; margin: 0; color: #766d7c; line-height: 1.65; }
+	.selection-summary { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-top: 22px; padding-top: 16px; border-top: 1px solid #e8d8b5; color: #49345f; }
+	.selection-summary span { color: #766d7c; }
+	.selection-summary button { margin-left: auto; }
+	.shop-section { margin-top: 30px; scroll-margin-top: 24px; }
+	.shop-section h2 { margin: 0; color: #49345f; font-size: 1.3rem; }
+	.shop-section > p { margin: 6px 0 16px; color: #887f8f; }
+	.date-field { display: grid; max-width: 320px; gap: 7px; }
+	.date-field label { margin: 0; }
+	.shop-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+	.selection-option { display: flex; min-width: 0; gap: 12px; padding: 17px; border: 1px solid #e7e0e9; border-radius: 6px; background: #fffefd; cursor: pointer; transition: border-color .16s ease, background .16s ease; }
+	.selection-option:has(input:checked) { border-color: #9a7a43; background: #fbf7ee; }
+	.selection-option input[type="radio"], .selection-option input[type="checkbox"] { width: 18px; height: 18px; max-width: 18px; flex: 0 0 18px; margin: 3px 0 0; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; accent-color: #594270; }
+	.option-content { display: grid; min-width: 0; gap: 7px; }
+	.option-content strong { color: #49345f; }
+	.option-content > span { color: #766d7c; line-height: 1.5; overflow-wrap: anywhere; }
+	.option-meta { display: flex; flex-wrap: wrap; gap: 8px 14px; color: #795e37 !important; font-size: .9rem; font-weight: 600; }
+	.shop-empty { grid-column: 1 / -1; padding: 22px; border: 1px dashed #ded6e2; color: #887f8f; text-align: center; }
+	[hidden] { display: none !important; }
+	@media (max-width: 760px) { .shop-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+	@media (max-width: 520px) {
+		.shop-intro { padding: 24px 18px; }
+		.shop-intro h1 { font-size: 1.8rem; }
+		.shop-grid { grid-template-columns: 1fr; }
+		.selection-summary button { margin-left: 0; }
+	}
+</style>
+
+<section class="shop-intro">
+	<p class="shop-kicker">MimoCommerce</p>
+	<h1>Elige tu servicio</h1>
+	<p>Selecciona el servicio que necesitas. Después podrás elegir los productos disponibles que quieres incluir.</p>
+	<div class="selection-summary" id="seleccion" aria-live="polite">
+		<strong id="selected-service">Ningún servicio seleccionado</strong>
+		<span id="selected-date">Fecha sin elegir</span>
+		<span id="selected-products">0 productos seleccionados</span>
+		<button class="button button-secondary" id="clear-selection" type="button" disabled>Limpiar selección</button>
+	</div>
+</section>
+
+<section class="shop-section" id="servicios" aria-labelledby="services-heading">
+	<h2 id="services-heading">Servicios disponibles</h2>
+	<p>Elige uno para continuar con los productos.</p>
+	<div class="shop-grid">
+		{% for servicio in servicios %}
+		<label class="selection-option">
+			<input type="radio" name="servicio" value="{{ servicio.pk }}" data-service-name="{{ servicio.nombre }}">
+			<span class="option-content">
+				<strong>{{ servicio.nombre }}</strong>
+				<span>{{ servicio.descripcion|default:"Consulta los detalles de este servicio."|linebreaksbr }}</span>
+				<span class="option-meta"><span>${{ servicio.precio }}</span></span>
+			</span>
+		</label>
+		{% empty %}
+		<p class="shop-empty">Por ahora no hay servicios disponibles.</p>
+		{% endfor %}
+	</div>
+</section>
+
+<section class="shop-section" id="fecha-servicio" aria-labelledby="date-heading" hidden>
+	<h2 id="date-heading">Elige la fecha</h2>
+	<p>Selecciona el día en que quieres realizar este servicio.</p>
+	<div class="date-field">
+		<label for="service-date">Fecha del servicio</label>
+		<input id="service-date" type="date" min="{{ today|date:'Y-m-d' }}" required>
+	</div>
+</section>
+
+<section class="shop-section" id="productos" aria-labelledby="products-heading" hidden>
+	<h2 id="products-heading">Elige los productos</h2>
+	<p>Marca todos los productos que quieres incluir en el servicio seleccionado.</p>
+	<div class="shop-grid">
+		{% for producto in productos %}
+		<label class="selection-option">
+			<input type="checkbox" name="productos" value="{{ producto.pk }}" data-product-name="{{ producto.nombre }}">
+			<span class="option-content">
+				<strong>{{ producto.nombre }}</strong>
+				<span>Disponible para incluir en el servicio.</span>
+			</span>
+		</label>
+		{% empty %}
+		<p class="shop-empty">Por ahora no hay productos disponibles.</p>
+		{% endfor %}
+	</div>
+</section>
+
+<script src="{% static 'js/usuario.js' %}" defer></script>
+{% endblock contentido %}

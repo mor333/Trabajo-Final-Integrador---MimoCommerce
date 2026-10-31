@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+{% block title %}Stock | MimoCommerce{% endblock %}
+{% block contentido %}
+<div class="page-heading">
+    <h1>Stock</h1>
+    <a class="button" href="{% url 'stock:stock_create' %}">Agregar al stock</a>
+</div>
+<div class="table-wrap">
+    <table>
+        <thead><tr><th>Producto</th><th>Cantidad</th><th>Acciones</th></tr></thead>
+        <tbody>
+            {% for stock in stocks %}
+            <tr>
+                <td>{{ stock.producto.nombre }}</td>
+                <td>{{ stock.cantidad }}</td>
+                <td><div class="actions">
+                    <a class="button button-secondary" href="{% url 'stock:stock_detail' stock.pk %}">Ver detalle</a>
+                    <a class="button button-secondary" href="{% url 'stock:stock_update' stock.pk %}">Editar</a>
+                    <a class="button button-danger" href="{% url 'stock:stock_delete' stock.pk %}">Eliminar</a>
+                </div></td>
+            </tr>
+            {% empty %}<tr><td class="empty" colspan="3">Todavía no hay productos cargados en stock.</td></tr>{% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock contentido %}

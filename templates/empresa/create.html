@@ -1,0 +1,14 @@
+{% extends 'base/base.html' %}
+{% block title %}Crear empresa | MimoCommerce{% endblock %}
+{% block contentido %}
+    <h1>Crear Empresa</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-actions">
+            <button type="submit">Guardar empresa</button>
+            <a class="button button-secondary" href="{% url 'empresa:empresa_list' %}">Cancelar</a>
+        </div>
+    </form>
+{% endblock contentido %}

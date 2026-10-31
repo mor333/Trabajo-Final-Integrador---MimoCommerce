@@ -1,0 +1,14 @@
+{% extends 'base/base.html' %}
+{% block title %}Agregar al stock | MimoCommerce{% endblock %}
+{% block contentido %}
+    <h1>Crear Stock</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-actions">
+            <button type="submit">Guardar stock</button>
+            <a class="button button-secondary" href="{% url 'stock:stock_list' %}">Cancelar</a>
+        </div>
+    </form>
+{% endblock contentido %}

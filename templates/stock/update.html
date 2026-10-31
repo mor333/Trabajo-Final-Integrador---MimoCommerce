@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %}
+{% block title %}Editar stock | MimoCommerce{% endblock %}
+{% block contentido %}
+    <h1>Editar stock</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-actions">
+            <button type="submit">Guardar cambios</button>
+            <a class="button button-secondary" href="{% url 'stock:stock_list' %}">Cancelar</a>
+        </div>
+    </form>
+{% endblock contentido %}

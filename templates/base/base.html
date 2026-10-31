@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}MimoCommerce{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <div class="company-heading">
+                <img class="institutional-logo" src="{% static 'img/logo.PNG' %}" alt="Logo de MimoCommerce">
+                {% if request.resolver_match.namespace == 'usuario' %}
+                <a class="brand" href="{% url 'usuario:usuario' %}">MimoCommerce</a>
+                {% else %}
+                <a class="brand" href="{% url 'inicio:inicio' %}">MimoCommerce</a>
+                {% endif %}
+                {% if request.resolver_match.namespace != 'usuario' %}
+                {% if empresa_encabezado %}
+                <a class="company-details-link" href="{% url 'empresa:empresa_detail' empresa_encabezado.pk %}" aria-label="Ver detalles de la empresa" title="Ver detalles de la empresa">✦</a>
+                {% endif %}
+                {% endif %}
+            </div>
+            {% if request.resolver_match.namespace == 'usuario' %}
+            <nav aria-label="Navegación principal">
+                <a href="{% url 'security:login' %}">Iniciar sesión</a>
+            </nav>
+            {% else %}
+            <nav aria-label="Navegación principal">
+                <a href="{% url 'productos:producto_list' %}">Productos</a>
+                <a href="{% url 'servicios:servicio_list' %}">Servicios</a>
+                <a href="{% url 'stock:stock_list' %}">Stock</a>
+                {% if user.is_authenticated %}
+                <form action="{% url 'security:logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Cerrar sesión</button>
+                </form>
+                {% endif %}
+            </nav>
+            {% endif %}
+        </div>
+    </header>
+    <main>
+        <section class="panel">
+            {% block contentido %}{% endblock %}
+        </section>
+    </main>
+</body>
+</html>

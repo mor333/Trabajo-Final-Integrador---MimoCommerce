@@ -1,0 +1,28 @@
+{% extends 'base/base.html' %}
+{% block title %}Servicios | MimoCommerce{% endblock %}
+{% block contentido %}
+<div class="page-heading">
+    <h1>Servicios</h1>
+    <a class="button" href="{% url 'servicios:servicio_create' %}">Crear servicio</a>
+</div>
+<div class="table-wrap">
+    <table>
+        <thead><tr><th>Nombre</th><th>Descripción</th><th>Precio</th><th>Fecha</th><th>Acciones</th></tr></thead>
+        <tbody>
+            {% for servicio in servicios %}
+            <tr>
+                <td>{{ servicio.nombre }}</td>
+                <td>{{ servicio.descripcion|truncatewords:20 }}</td>
+                <td>{{ servicio.precio }}</td>
+                <td>{{ servicio.fecha|date:"d/m/Y" }}</td>
+                <td><div class="actions">
+                    <a class="button button-secondary" href="{% url 'servicios:servicio_detail' servicio.pk %}">Ver detalle</a>
+                    <a class="button button-secondary" href="{% url 'servicios:servicio_update' servicio.pk %}">Editar</a>
+                    <a class="button button-danger" href="{% url 'servicios:servicio_delete' servicio.pk %}">Eliminar</a>
+                </div></td>
+            </tr>
+            {% empty %}<tr><td class="empty" colspan="5">Todavía no hay servicios registrados.</td></tr>{% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock contentido %}

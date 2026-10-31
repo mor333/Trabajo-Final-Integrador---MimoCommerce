@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %}
+{% block title %}Crear servicio | MimoCommerce{% endblock %}
+{% block contentido %}
+    <h1>Crear Servicio</h1>
+
+    {% if form.errors %}
+    <div class="form-errors" role="alert">
+        <strong>Revisa los siguientes errores:</strong>
+        <ul>
+            {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li>{{ field.label }}: {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <form method="post" class="service-form" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-actions">
+            <button type="submit">Guardar servicio</button>
+            <a class="button button-secondary" href="{% url 'servicios:servicio_list' %}">Cancelar</a>
+        </div>
+    </form>
+{% endblock contentido %}

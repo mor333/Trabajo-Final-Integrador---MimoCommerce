@@ -1,0 +1,101 @@
+{% extends 'base/base.html' %}
+{% block title %}Inicio | MimoCommerce{% endblock %}
+{% block contentido %}
+<style>
+    .welcome {
+        position: relative;
+        overflow: hidden;
+        padding: clamp(28px, 6vw, 58px);
+        border: 1px solid #eee7f0;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #fbf8fc, #f5eff8);
+    }
+    .welcome::after {
+        position: absolute;
+        right: 7%;
+        bottom: -88px;
+        width: 220px;
+        height: 220px;
+        border: 1px solid #c5a76b65;
+        border-radius: 50%;
+        content: "";
+        box-shadow: 0 0 0 20px #c5a76b0b, 0 0 0 42px #c5a76b08;
+    }
+    .welcome-copy { position: relative; z-index: 1; max-width: 620px; }
+    .eyebrow { margin: 0 0 12px; color: #9a7a43; font-size: .78rem; font-weight: 650; letter-spacing: .16em; text-transform: uppercase; }
+    .welcome h1 { margin-bottom: 14px; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.12; }
+    .welcome-copy > p:not(.eyebrow) { max-width: 540px; margin: 0; color: #766d7c; font-size: 1.05rem; line-height: 1.7; }
+    .welcome .button { margin-top: 25px; }
+    .section-title { margin: 34px 0 16px; color: #49345f; font-size: 1.2rem; font-weight: 600; }
+    .module-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 15px; }
+    .module-card {
+        display: flex;
+        min-height: 150px;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+        border: 1px solid #eee8f0;
+        border-radius: 12px;
+        background: #fffefd;
+        color: inherit;
+        text-decoration: none;
+        transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+    }
+    .module-card:hover { transform: translateY(-3px); border-color: #d5c29c; box-shadow: 0 8px 20px #49345f12; }
+    .module-icon {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        margin-bottom: 15px;
+        place-items: center;
+        border: 1px solid #e8d8b5;
+        border-radius: 10px;
+        background: #fbf7ee;
+        color: #795e37;
+        font-size: 1rem;
+    }
+    .module-card strong { color: #49345f; font-size: 1rem; }
+    .module-card span:last-child { margin-top: 6px; color: #887f8f; font-size: .9rem; line-height: 1.45; }
+    @media (max-width: 760px) {
+        .module-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .welcome::after { right: -100px; }
+    }
+    @media (max-width: 440px) {
+        .module-grid { grid-template-columns: 1fr; }
+        .module-card { min-height: 120px; }
+    }
+</style>
+
+<section class="welcome">
+    <div class="welcome-copy">
+        <p class="eyebrow">Tu espacio de gestión</p>
+        <h1>Bienvenida a MimoCommerce</h1>
+        <p>Organiza tus productos, servicios, empresas y existencias desde un solo lugar, de forma simple y ordenada.</p>
+        <a class="button" href="{% url 'productos:producto_list' %}">Ver productos</a>
+    </div>
+</section>
+
+<h2 class="section-title">Accesos rápidos</h2>
+<section class="module-grid" aria-label="Accesos a las secciones">
+    <a class="module-card" href="{% url 'productos:producto_list' %}">
+        <span class="module-icon" aria-hidden="true">✦</span>
+        <strong>Productos</strong>
+        <span>Consulta y administra tu catálogo.</span>
+    </a>
+    <a class="module-card" href="{% url 'stock:stock_list' %}">
+        <span class="module-icon" aria-hidden="true">◇</span>
+        <strong>Stock</strong>
+        <span>Revisa las existencias disponibles.</span>
+    </a>
+    <a class="module-card" href="{% url 'servicios:servicio_list' %}">
+        <span class="module-icon" aria-hidden="true">✧</span>
+        <strong>Servicios</strong>
+        <span>Gestiona servicios, precios y fechas.</span>
+    </a>
+    <a class="module-card" href="{% url 'empresa:empresa_list' %}">
+        <span class="module-icon" aria-hidden="true">❋</span>
+        <strong>Empresas</strong>
+        <span>Encuentra los datos de tus empresas.</span>
+    </a>
+</section>
+{% endblock contentido %}

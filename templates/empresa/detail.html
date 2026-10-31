@@ -1,0 +1,18 @@
+{% extends 'base/base.html' %}
+{% block title %}{{ empresa.nombre }} | Empresas{% endblock %}
+{% block contentido %}
+<div class="page-heading">
+    <h1>Detalle de empresa</h1>
+    <a class="button button-secondary" href="{% url 'empresa:empresa_list' %}">Volver a empresas</a>
+</div>
+<dl class="detail-grid">
+    <div class="detail-item"><dt>Nombre</dt><dd>{{ empresa.nombre }}</dd></div>
+    <div class="detail-item"><dt>Dirección</dt><dd>{{ empresa.direccion }}</dd></div>
+    <div class="detail-item"><dt>Teléfono</dt><dd>{{ empresa.telefono }}</dd></div>
+    <div class="detail-item"><dt>Email</dt><dd><a href="mailto:{{ empresa.email }}">{{ empresa.email }}</a></dd></div>
+</dl>
+<div class="form-actions detail-actions">
+    <a class="button" href="{% url 'empresa:empresa_update' empresa.pk %}">Editar empresa</a>
+    <a class="button button-secondary" href="{% url 'empresa:empresa_list' %}">Volver</a>
+</div>
+{% endblock contentido %}

@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+{% block title %}{{ producto.nombre }} | Productos{% endblock %}
+{% block contentido %}
+<div class="page-heading">
+    <h1>Detalle de producto</h1>
+    <a class="button button-secondary" href="{% url 'productos:producto_list' %}">Volver a productos</a>
+</div>
+<dl class="detail-grid">
+    <div class="detail-item"><dt>Nombre</dt><dd>{{ producto.nombre }}</dd></div>
+    <div class="detail-item"><dt>Fecha de vencimiento</dt><dd>{{ producto.fecha_de_vencimiento|date:"d/m/Y" }}</dd></div>
+    <div class="detail-item"><dt>Disponibilidad</dt><dd><span class="status">{{ producto.disponibilidad|yesno:"Disponible,No disponible" }}</span></dd></div>
+</dl>
+<div class="form-actions detail-actions">
+    <a class="button" href="{% url 'productos:producto_update' producto.pk %}">Editar producto</a>
+    <a class="button button-secondary" href="{% url 'productos:producto_list' %}">Volver</a>
+</div>
+{% endblock contentido %}
