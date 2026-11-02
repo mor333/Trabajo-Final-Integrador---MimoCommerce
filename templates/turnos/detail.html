@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+{% block title %}Detalle de turno | MimoCommerce{% endblock %}
+{% block contentido %}
+<div class="page-heading">
+    <h1>Detalle de turno</h1>
+    <a class="button button-secondary" href="{% url 'turnos:turno_list' %}">Volver a turnos</a>
+</div>
+<dl class="detail-grid">
+    <div class="detail-item"><dt>Cliente</dt><dd>{{ turno.nombre_cliente|default:turno.usuario|default:"Invitado" }}</dd></div>
+    <div class="detail-item"><dt>Servicio</dt><dd>{{ turno.servicio }}</dd></div>
+    <div class="detail-item"><dt>Fecha</dt><dd>{{ turno.fecha|date:"d/m/Y" }}</dd></div>
+    <div class="detail-item"><dt>Hora</dt><dd>{{ turno.hora|time:"H:i" }}</dd></div>
+    <div class="detail-item"><dt>Estado</dt><dd>{{ turno.estado }}</dd></div>
+    <div class="detail-item"><dt>Observaciones</dt><dd>{{ turno.observaciones|default:"Sin observaciones"|linebreaksbr }}</dd></div>
+</dl>
+<div class="form-actions detail-actions">
+    <a class="button" href="{% url 'turnos:turno_update' turno.pk %}">Editar turno</a>
+    <a class="button button-danger" href="{% url 'turnos:turno_delete' turno.pk %}">Eliminar turno</a>
+</div>
+{% endblock contentido %}

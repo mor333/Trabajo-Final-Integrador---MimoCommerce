@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+{% block title %}Turnos | MimoCommerce{% endblock %}
+{% block contentido %}
+<div class="page-heading">
+    <h1>Turnos</h1>
+</div>
+<div class="table-wrap">
+    <table>
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Servicio</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for turno in turnos %}
+            <tr>
+                <td>{{ turno.nombre_cliente|default:turno.usuario|default:"Invitado" }}</td>
+                <td>{{ turno.servicio }}</td>
+                <td>{{ turno.fecha|date:"d/m/Y" }}</td>
+                <td>{{ turno.hora|time:"H:i" }}</td>
+                <td>{{ turno.estado }}</td>
+                <td>
+                    <div class="actions">
+                        <a class="button button-secondary" href="{% url 'turnos:turno_detail' turno.pk %}">Ver detalle</a>
+                        <a class="button button-secondary" href="{% url 'turnos:turno_update' turno.pk %}">Editar</a>
+                        <a class="button button-danger" href="{% url 'turnos:turno_delete' turno.pk %}">Eliminar</a>
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td class="empty" colspan="6">Todavía no hay turnos registrados.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock contentido %}

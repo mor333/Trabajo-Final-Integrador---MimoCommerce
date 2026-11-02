@@ -16,6 +16,7 @@
                 <td>{{ servicio.precio }}</td>
                 <td>{{ servicio.fecha|date:"d/m/Y" }}</td>
                 <td><div class="actions">
+                    <a class="button" href="{% url 'turnos:turno_create' %}?servicio={{ servicio.pk }}">Agendar</a>
                     <a class="button button-secondary" href="{% url 'servicios:servicio_detail' servicio.pk %}">Ver detalle</a>
                     <a class="button button-secondary" href="{% url 'servicios:servicio_update' servicio.pk %}">Editar</a>
                     <a class="button button-danger" href="{% url 'servicios:servicio_delete' servicio.pk %}">Eliminar</a>

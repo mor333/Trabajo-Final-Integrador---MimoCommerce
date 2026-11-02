@@ -1,0 +1,19 @@
+{% extends 'base/base.html' %}
+{% block title %}Eliminar turno | MimoCommerce{% endblock %}
+{% block contentido %}
+<h1>Confirmar eliminación</h1>
+<p>¿Estás seguro de que deseas eliminar este turno?</p>
+<dl class="detail-grid">
+    <div class="detail-item"><dt>Usuario</dt><dd>{{ object.usuario }}</dd></div>
+    <div class="detail-item"><dt>Servicio</dt><dd>{{ object.servicio }}</dd></div>
+    <div class="detail-item"><dt>Fecha</dt><dd>{{ object.fecha|date:"d/m/Y" }}</dd></div>
+    <div class="detail-item"><dt>Hora</dt><dd>{{ object.hora|time:"H:i" }}</dd></div>
+</dl>
+<form method="post">
+    {% csrf_token %}
+    <div class="form-actions">
+        <button class="button-danger" type="submit">Sí, eliminar</button>
+        <a class="button button-secondary" href="{% url 'turnos:turno_detail' object.pk %}">Cancelar</a>
+    </div>
+</form>
+{% endblock contentido %}

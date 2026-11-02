@@ -3,7 +3,6 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
-from apps.servicios.forms import ServicioForm
 from apps.servicios.models import Servicio
 
 # Create your views here.
@@ -14,13 +13,13 @@ class ServicioListView(LoginRequiredMixin, ListView):
 
 class ServicioCreateView(LoginRequiredMixin, CreateView):
     model = Servicio
-    form_class = ServicioForm
+    fields = '__all__'
     template_name = 'servicios/create.html'
     success_url = reverse_lazy('servicios:servicio_list')
 
 class ServicioUpdateView(LoginRequiredMixin, UpdateView):
     model = Servicio
-    form_class = ServicioForm
+    fields = '__all__'
     template_name = 'servicios/update.html'
     success_url = reverse_lazy('servicios:servicio_list')
 

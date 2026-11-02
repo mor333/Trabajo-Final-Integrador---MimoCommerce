@@ -70,8 +70,8 @@
     <div class="welcome-copy">
         <p class="eyebrow">Tu espacio de gestión</p>
         <h1>Bienvenida a MimoCommerce</h1>
-        <p>Organiza tus productos, servicios, empresas y existencias desde un solo lugar, de forma simple y ordenada.</p>
-        <a class="button" href="{% url 'productos:producto_list' %}">Ver productos</a>
+        <p>Organiza los productos, servicios, turnos y existencias de tu empresa desde un solo lugar, de forma simple y ordenada.</p>
+        <a class="button" href="{% url 'turnos:turno_list' %}">Ver turnos</a>
     </div>
 </section>
 
@@ -94,8 +94,8 @@
     </a>
     <a class="module-card" href="{% url 'empresa:empresa_list' %}">
         <span class="module-icon" aria-hidden="true">❋</span>
-        <strong>Empresas</strong>
-        <span>Encuentra los datos de tus empresas.</span>
+        <strong>Empresa</strong>
+        <span>Consulta los datos de tu empresa.</span>
     </a>
 </section>
 {% endblock contentido %}

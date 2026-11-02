@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'apps.stock',
     'apps.security',
     'apps.usuario',
+    'apps.turnos',
 ]
 
 MIDDLEWARE = [
@@ -67,7 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'apps.empresa.context_processors.empresa_encabezado',
+                'apps.empresa.views.empresa_encabezado',
             ],
         },
     },

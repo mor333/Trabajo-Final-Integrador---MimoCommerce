@@ -68,6 +68,7 @@ textarea { min-height: 110px; }
 .helptext { display: block; margin-top: 6px; color: #887f8f; font-size: .88rem; }
 .errorlist { color: #963e5d; }
 .form-errors { margin: 0 0 20px; padding: 14px 17px; border: 1px solid #e4bdc9; border-left: 4px solid #a34b68; border-radius: 8px; background: #fbf1f4; color: #852f4e; }
+.form-success { margin: 0 0 20px; padding: 14px 17px; border: 1px solid #b9d8c3; border-left: 4px solid #34764a; border-radius: 8px; background: #eff8f1; color: #245c36; font-weight: 600; }
 .form-errors ul { margin: 8px 0 0; padding-left: 22px; }
 .form-errors li + li { margin-top: 4px; }
 .service-form > p > .errorlist { display: none; }

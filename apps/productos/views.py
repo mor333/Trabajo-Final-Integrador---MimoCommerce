@@ -3,7 +3,6 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
-from apps.productos.forms import ProductoForm
 from apps.productos.models import Producto
 
 # Create your views here.
@@ -14,13 +13,13 @@ class ProductoListView(LoginRequiredMixin, ListView):
 
 class ProductoCreateView(LoginRequiredMixin, CreateView):
     model = Producto
-    form_class = ProductoForm
+    fields = '__all__'
     template_name = 'productos/create.html'
     success_url = reverse_lazy('productos:producto_list')
 
 class ProductoUpdateView(LoginRequiredMixin, UpdateView):
     model = Producto
-    form_class = ProductoForm
+    fields = '__all__'
     template_name = 'productos/update.html'
     success_url = reverse_lazy('productos:producto_list')
 
